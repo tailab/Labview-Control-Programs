@@ -1,0 +1,5 @@
+1.When you copy the labview programme, you need copy the whole floder, contains the other files.
+
+2. Make sure the "system setting" of the AFG is using GPIB connected.
+
+3.Turn on the AFG first, then download the timing of the AFG, after this finished, then connect the output voltage of the AFG to the ananlog control of the IPG laser. This is very important!!!!!
