@@ -1,0 +1,74 @@
+#
+# The include file for all the timing files in the new lab (Lab2 directory) timing files. By @requiring this file inside other files.
+# It's easier to make system-wide changes. All the units is 100 microsecond except for specially noted.
+#
+# Author: Le Luo         Date: 16 December 2005
+#
+                     #
+#------
+# MOT Settings
+#------
+                        #
+$mot_loading_time = 50000;
+$mot_cooling_time = 500;
+$mot_optical_pumping_time = 2;
+$clear_atoms_time = 5000;                             
+                        #
+#------
+# Shutter Settings
+#------
+		         #
+$shutter_lead = 130;	 # These are the safe lead and lag times.  Listed below are the minimum
+$shutter_lag = 200;	 # shutter lead and lag times that should be used.
+                         #
+$min_shutter_lead = 80;  # How early to open a shutter
+$min_shutter_lag = 150;  # How long to wait after a shutter closes before turning things on again
+                         #
+#------
+# Optical Pumping Shutter Section
+#------
+                         #
+$hmot_shutter_lead = 18; # How early to open shutter in horizontal
+                         # MOT beams before turning off MOT beams
+$hmot_shutter_delay = 4; # How long to wait after turning off MOT
+                         # beams before it is safe to turn them back on for optical pumping
+                         #
+#------
+# Camera Settings
+#------
+$camera_lead = 250;  # Wait time for camera shutter to open
+$camera_lag = 250;   # Wait time for camera shutter to close
+                         #
+$min_camera_lead = 200;  # Absolute minimum wait time for camera shutter to open
+$min_camera_lag = 200;   # Absolute minimum wait time for camera shutter to close
+                                 #
+$wait_before_probe_FORT = 10000;  # Wait Time before atoms are probed MUST BE AT LEAST AS LONG AS HIGHFIELD_MAGNETS_LEAD
+$wait_before_taking_ref = 20000;  # How long to wait before take the camera reference picture
+                                  #
+#-----
+# PMT Settings
+#-----
+                     #
+$PMT_lead_time = 2000;      # PMT Gate Lead time
+$PMT_probe_time = 5000;     # Time for PMT to collect light
+                     #
+#-----
+# Probe Settings
+#-----
+                     #
+$probe_pulse_time = 100;        # Time for MOT&Repump beam to probe FORT
+$freq_shift_delay = 2000;       # Delay Time between commanding dye laser and laser beginning to unlock
+$unlock_to_shift_buffer = 300;  # Buffer Time between dye laser unlock gate and freq shift
+$imaging_pulse_duration = 5;	# probe pulse duration (IN MICROSECONDS)
+                     #
+#-----
+# Magnet Settings
+#-----
+                                      #
+$highfield_magnets_lead = 8000;       # Lead Time between commanding Highfield Magnets and Magnets beginning to work 
+                                      #
+#-----
+# Full Well Evaporation Settings
+#-----
+$fw_evap_time = 60000;       # How long to evaporatively cool in full well
+$blocker_moving_time = 8250; # How long to moving the CO2 blocker

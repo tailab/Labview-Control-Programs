@@ -1,0 +1,147 @@
+1,A,B,2,C,3,D
+A,0.0401,0.0001,B,0.0001,1e-005,C,0.0401,1e-005
+3.5651 .0001 48
+MOT AO and Repump AO Enable
+0 500
+
+MOT AO S1
+0 10500
+
+MOT AO S2
+0 10550
+
+Repump AO S1
+0 10500
+
+Repump AO S2
+0 10550
+
+Slower Beam Shutter
+0 10400
+
+MOT Beam Shutter
+0 10650 20550 25650
+
+MOT Beam Vertical Shutter
+0 20550
+
+Reserve 1
+0
+
+Reserve 2
+0
+
+Reserve 3
+0
+
+Reserve 4
+0
+
+Reserve 5
+0
+
+Reserve 6
+0
+
+Reserve 7
+0
+
+Reserve 8
+0
+
+
+Q1
+0
+
+Q2
+0
+
+Q3
+0
+
+Q4
+0
+
+A0 MAG MUX
+0
+
+A1 MAG MUX
+0
+
+A2 MAG MUX
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Q1 for polarization switch
+1 12050
+
+Q2
+0 10650
+
+Q3
+0 10650
+
+Q4
+1 12050
+
+A0 MAG MUX
+0 500 10550
+
+A1 MAG MUX
+0 10650 25650
+
+A2 MAG MUX
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0

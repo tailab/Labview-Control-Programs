@@ -1,0 +1,234 @@
+# This timing file have a loading phase of MOT and a cooling phase of MOT, and detect the FORT trap
+@require "Timing Include.txt";
+#No Empty Lines Allowed In the definition part, Perl don't take empty lines!
+#
+#
+##########################################################
+#   These definitions are in units of 100 MICROSECONDS   #
+##########################################################
+#
+#Time Duration we use in this timing file
+$mot_loading_time = 10000;           # Duration of loading phase
+$wait_before_probe_FORT_time = 10000;      # Waiting time after MOT cooling
+$mot_cooling_time = 50;               # duration of mot cooling phase
+$PMT_probe_time = 5000;     # Time for PMT to collect light
+$atom_clear_time = 10000;     # Time for atoms to go away
+$system_warmup_time = 500;   # Time for system warmup
+$shutter_lead_time = 1000; #Time delay for shutter to close
+$mot_repump_time=100; #Repumper duration
+$shutter_lead_time=100; # shutter lead time
+######################################################################
+# MOT Section: Define these parameters in units of 100 microseconds  #
+######################################################################
+#
+#Main Timing Points, which decide the procedures we are doing in this timing file
+# 
+$system_warmup=$system_warmup_time;
+$slower_shutter_close=$mot_loading_time+$system_warmup-$shutter_lead_time;
+$mot_cooling = $mot_loading_time+$system_warmup;
+$mot_repump=$mot_cooling+$mot_cooling_time
+$mot_shutter_close=$mot_repump+$mot_repump_time;
+$mot_off = $mot_shutter_close-$shutter_lead_time;
+$mot_magnets_off=$mot_off; 
+$magnets_polarization_switch=$mot_magnets_off+1500;
+$FORT_magnets_on=$mot_magnets_off+100;
+$FORT_probing = $mot_off + $wait_before_probe_FORT_time;
+$mot_vertical_shutter_close=$FORT_probing-$shutter_lead_time;
+$FORT_probing_off = $FORT_probing + $shutter_lead_time+$PMT_probe_time;
+$system_off = $FORT_probing_off+$atom_clear_time;
+$reset_states = $system_off;
+$end_time = $reset_states + 1;
+$shutter_lead=500
+#
+#
+$slower_beam_off = $mot_cooling - $shutter_lead - 1000;
+$repump_beam_off = $mot_opt_pump; 
+$mot_beam_off = $mot_off;
+#
+#Timing points deciding the Imaging Pulse
+#
+#
+#Timing points deciding the Camera Shutter
+#
+#
+#
+######################################################################
+#   These definitions are in units of SECONDS for Quantum Composer   #
+######################################################################
+#The two lines here are no longer reserved. It is Quantum Composer Control. The time unit here is SECONDS. 
+#For now, it supports single pulse in each channel. The system period is 150ms.
+#EXAMPLE:
+#1,A,B,2,C,3,D
+#A,0.6,1.2,B,1.2,2.0,C,1E-4,1E-5,D,0,0.5
+#The format must be strictly followed because I have put up no error checking for the formats.
+#Every term must be separated by a comma (,)
+#A,B,C,D etc. are Quantum Composer Internal Channels
+#1,2,3,4 etc are Quantum Composer External Channels
+#In the first line we define MUX: the composition of external channel in terms of internal channels. It is logical OR of internal channels that will output on respective external channels.
+#e.g. 1,A,B means that the 1st output channel is combination of A and B, a.k.a, two pulses.
+#The second line is definition of single pulses on each internal channel.
+#For each channel, the first number is the delay from the trigger time, the second number is the pulse width.
+#Substitutions can be used in this line:
+#$Time1=0.000001;
+#$Time2=0.000002;
+$Delay1=0.0401;
+$Width1=0.0001;
+$Delay2=0.0001;
+$Width2=0.00001;
+1,A,B,2,C,3,D
+A,$Delay1,$Width1,B,$Delay2,$Width2,C,$Delay1,$Width2
+#
+$end_time*.0001 .0001 48       # Total time in seconds, time step in seconds, channel number
+#############
+# DIO_0, For mot and imaging#
+#############
+MOT AO and Repump AO Enable
+0 $system_warmup
+
+MOT AO S1
+0 $mot_cooling 
+
+MOT AO S2
+0 $mot_off  
+
+Repump AO S1
+0 $mot_cooling
+
+Repump AO S2
+0 $mot_off 
+
+Slower Beam Shutter
+0 $slower_shutter_close
+
+MOT Beam Shutter 
+0 $mot_shutter_close $FORT_probing $FORT_probing_off
+
+MOT Beam Vertical Shutter
+0 $FORT_probing
+
+Reserve 1
+0
+
+Reserve 2
+0
+
+Reserve 3
+0
+
+Reserve 4
+0
+
+Reserve 5
+0
+
+Reserve 6
+0
+
+Reserve 7
+0
+
+Reserve 8
+0
+
+
+#############
+# DIO_1, Not used#
+#############
+Q1 
+0  
+
+Q2
+0 
+
+Q3
+0 
+
+Q4
+0
+
+A0 MAG MUX
+0 
+
+A1 MAG MUX
+0 
+
+A2 MAG MUX
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+#############
+# DIO_2, For OPT and Magnets#
+#############
+Q1 for polarization switch
+1  $magnets_polarization_switch
+
+Q2
+0 $FORT_magnets_on
+
+Q3
+0 $FORT_magnets_on
+
+Q4
+1  $magnets_polarization_switch
+
+A0 MAG MUX
+0 $system_warmup $mot_magnets_off 
+
+A1 MAG MUX
+0 $FORT_magnets_on $FORT_probing_off
+
+A2 MAG MUX
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
+
+Empty
+0
